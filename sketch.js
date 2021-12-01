@@ -12,7 +12,7 @@ var grupoDeCactos,grupoDeNuvens
 var gameOver,gameOverImage
 var restart, restartImage
 var pulo, morte, checkPoint ;
-
+var larguraTela = window.innerWidth
 
 function reset (){
   estadoDeJogo = 'jogando'
@@ -28,25 +28,25 @@ function reset (){
 function crianuvem () {
 
   if(frameCount%60 === 0 ){
-    var nuvem = createSprite(650,50,60,10);
+    var nuvem = createSprite(larguraTela+50,50,60,10);
   nuvem.velocityX = -2
   nuvem.y =  Math.round(random(0,120))
   nuvem.addImage(imagemNuvem)
   nuvem.scale = 0.7
    nuvem.depth = trex.depth
    trex.depth = trex.depth +1
-    nuvem.lifetime = 350
+    nuvem.lifetime = larguraTela+50
     grupoDeNuvens.add(nuvem)
      }
 }
 
 function cactos(){
   if(frameCount%40 === 0 ){
-    var cacto = createSprite (650,180,10,30)
+    var cacto = createSprite (larguraTela+50,180,10,30)
     cacto.velocityX = -(7+pontos/100)
     var tipo = Math.round(random(1,6))
     cacto.scale = 0.6
-    cacto.lifetime = 600
+    cacto.lifetime = larguraTela+50
     switch(tipo){ 
         case 1: cacto.addImage(cacto1)
         break
@@ -95,7 +95,7 @@ function preload() {
 
 // funcao que configura
 function setup() {
-  createCanvas(600,200);
+  createCanvas(larguraTela,200);
   
   trex = createSprite(50, 160, 20, 40);
   trex.addAnimation("correndo", trexCorrendo);
@@ -103,12 +103,12 @@ function setup() {
   trex.debug = false
   trex.setCollider('circle',0,0,40)
   
-  chaoInvisivel = createSprite (300,203,600,20)
+  chaoInvisivel = createSprite (larguraTela/2,203,larguraTela,20)
   chaoInvisivel.visible = false
    
   
   
-  chao = createSprite (300,190,600,20)
+  chao = createSprite (larguraTela/2,190,larguraTela,20)
   chao.addImage(imagemchao)
   chao.x = chao.width/2
   
@@ -116,11 +116,11 @@ function setup() {
   
   grupoDeNuvens = new Group()
   
-  gameOver = createSprite(300, 50, 50, 50)
+  gameOver = createSprite(larguraTela/2, 50, 50, 50)
   gameOver.addImage(gameOverImage)
   gameOver.scale = 0.5
   gameOver.visible = false
-  restart = createSprite(300, 100, 50, 50)
+  restart = createSprite(larguraTela/2, 100, 50, 50)
   restart.addImage(restartImage)
   restart.scale = 0.5
   restart.visible = false
